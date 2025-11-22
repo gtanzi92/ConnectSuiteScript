@@ -1,0 +1,1 @@
+Collezione di script per installazione/manutenzione del dispatcher
