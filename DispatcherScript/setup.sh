@@ -7,7 +7,7 @@ fi
 
 USERNAME="dispatcher"
 USERHOME="/home/$USERNAME"
-ZIP_URL="http://oliva18.duckdns.org:8074/Dispatcher.zip"
+ZIP_URL="https://github.com/gtanzi92/ConnectSuiteScript/raw/refs/heads/main/DispatcherScript/Dispatcher.zip"
 ZIP_FILE="$USERHOME/Dispatcher.zip"
 
 # Creazione utente se non esiste
