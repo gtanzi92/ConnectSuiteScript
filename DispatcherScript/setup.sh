@@ -148,20 +148,8 @@ done
 
 echo "File creato con successo!"
 
-# Abilita e riavvia systemd-networkd
-echo "Abilito e riavvio systemd-networkd..."
-sudo systemctl enable systemd-networkd
-sudo systemctl restart systemd-networkd
-
-# Abilita e riavvia systemd-resolved (per DNS)
-echo "Abilito e riavvio systemd-resolved..."
-sudo systemctl enable systemd-resolved
-sudo systemctl restart systemd-resolved
 
 echo "=== Configurazione completata ==="
-echo "Verifica con: ip addr show $IFACE"
-
-
 
 
 # Installo servizio connect Raspberrypi e lo faccio partire
