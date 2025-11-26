@@ -115,6 +115,55 @@ EOF
 
 echo "File $DEVICE_JSON aggiornato con successo!"
 
+
+
+echo "=== Configurazione IP statico ==="
+
+# Chiedi i parametri all'utente
+read -p "Nome interfaccia (es. eth0 o wlan0): " IFACE
+read -p "Indirizzo IP (es. 192.168.1.50): " IPADDR
+read -p "Subnet mask in CIDR (es. 24 per 255.255.255.0): " CIDR
+read -p "Gateway (es. 192.168.1.1): " GATEWAY
+read -p "DNS (es. 8.8.8.8 1.1.1.1): " DNS
+
+# Percorso file di configurazione
+CONF_FILE="/etc/systemd/network/10-${IFACE}.network"
+
+echo "Creo il file di configurazione: $CONF_FILE"
+
+# Scrivi il file di configurazione
+sudo bash -c "cat > $CONF_FILE" <<EOF
+[Match]
+Name=$IFACE
+
+[Network]
+Address=${IPADDR}/${CIDR}
+Gateway=$GATEWAY
+EOF
+
+# Aggiungi DNS se specificati
+for d in $DNS; do
+    echo "DNS=$d" | sudo tee -a $CONF_FILE > /dev/null
+done
+
+echo "File creato con successo!"
+
+# Abilita e riavvia systemd-networkd
+echo "Abilito e riavvio systemd-networkd..."
+sudo systemctl enable systemd-networkd
+sudo systemctl restart systemd-networkd
+
+# Abilita e riavvia systemd-resolved (per DNS)
+echo "Abilito e riavvio systemd-resolved..."
+sudo systemctl enable systemd-resolved
+sudo systemctl restart systemd-resolved
+
+echo "=== Configurazione completata ==="
+echo "Verifica con: ip addr show $IFACE"
+
+
+
+
 # Installo servizio connect Raspberrypi e lo faccio partire
 
 echo "Installazione servizio Connect RaspberryPi"
