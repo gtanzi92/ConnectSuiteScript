@@ -56,7 +56,7 @@ apt install -y unzip curl
 
 # Scarico Dispatcher.zip nella home dell'utente dispatcher
 echo "Scarico Dispatcher.zip nella home di $USERNAME..."
-curl -o "$ZIP_FILE" "$ZIP_URL"
+wget -O "$ZIP_FILE" "$ZIP_URL"
 chown "$USERNAME":"$USERNAME" "$ZIP_FILE"
 
 # Estraggo il contenuto nella root /
