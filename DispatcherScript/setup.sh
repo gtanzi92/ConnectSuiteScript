@@ -159,10 +159,9 @@ echo "=== Configurazione completata ==="
 echo "Installazione servizio Connect RaspberryPi"
 apt install rpi-connect-lite
 
-## questi comandi verranno eseguiti a livello utente dispatcher ##
-sudo -u dispatcher bash <<EOF
-rpi-connect on
-EOF
+sudo rpi-connect on
+sudo enable rpi-connect
+
 loginctl enable-linger dispatcher
 
 echo "Controllo aggiornamenti"
