@@ -148,6 +148,8 @@ done
 
 echo "File creato con successo!"
 
+sudo systemctl enable systemd-networkd
+sudo systemctl restart systemd-networkd
 
 echo "=== Configurazione completata ==="
 
